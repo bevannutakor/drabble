@@ -1,0 +1,88 @@
+.container {
+    margin: 20px;
+    padding: 20px;
+    width: 400px;
+    min-height: 300px;
+    display: grid;
+    grid-template-rows: 20px 50px 1fr 50px;    
+    transition: all 0.2s;
+    background: rgba( 255, 255, 255, 0.05 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    gap: 10px;
+}
+
+.container:hover {
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+    transform: scale(1.01);
+}
+
+.emojis {
+    grid-row: 1/2;
+    justify-self: center;
+}
+
+.words {
+    text-align: center;
+    font-size: 13px;
+    grid-row: 2/4;
+    margin: 0.5rem;
+}
+
+.bar {
+    grid-row: 4/5;
+    background: rgba( 144, 144, 144, 0.25 );
+    border-radius: 40px;
+    margin: 0.7rem;
+    width: 50%;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barleft {
+    display: flex;
+    margin-right: 10px;
+    gap: 10px;
+}
+
+.barmid {
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.barright {
+    display: flex;
+    margin-left: 10px;
+    gap: 10px;
+}
+
+.comments:hover {
+    color: grey;
+}
+.saves:hover {
+    color: blue;
+}
+.favourites:hover {
+    color: yellow;
+}
+.upvote:hover {
+    color: red;
+}
+.downvote:hover {
+    color: red;
+}
+
+@media screen and (max-width: 943px) {
+    .container {
+      width: 300px;
+    }
+    .bar {
+        width: 70%;
+    }
+  }

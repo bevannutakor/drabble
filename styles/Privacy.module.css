@@ -1,0 +1,6 @@
+.container {
+    padding: 0 2rem;
+    font-size: calc(7px + 1vw);
+    text-align: center;
+    line-height: 3rem;
+}

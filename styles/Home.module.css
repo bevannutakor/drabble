@@ -1,0 +1,163 @@
+.container {
+  padding: 0 2rem;
+}
+
+.introtext {
+  display: flex;
+  height: 50vh;
+  margin-top: 6rem;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.words {
+  max-width: 51vw;
+}
+
+.buttondiv {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border-radius: 20px;
+  height: 40px;
+  width: 150px;
+  background-color: transparent;
+  border: 3px solid;
+  cursor: pointer;
+}
+
+.sectionone {
+  justify-content: space-between;
+  display: flex;
+  margin-top: 6rem;
+}
+
+.blobone {
+  flex: 1;
+}
+
+.textone {
+  text-align: center;
+  flex: 1;
+  margin-top: 5rem;
+}
+
+.sectiontwo {
+  justify-content: space-between;
+  display: flex;
+  margin-top: 7rem;
+}
+
+.blobtwo {
+  flex: 1;
+}
+
+.texttwo {
+  text-align: center;
+  flex: 1;
+  margin-top: 5rem;
+}
+
+.quote {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px;
+  border-radius: 50%;
+  height: 20vw;
+  width: 100%;
+  padding:90px;
+}
+.quotebox {
+  width: 80vw; 
+}
+
+@media screen and (max-width: 659px) {
+  .introtext {
+      margin-bottom: 3rem;
+  } 
+
+  .words {
+      max-width: 60vw;
+  }
+
+  .button {
+      margin-top: none;
+      height: 45px;
+      width: 170px;
+  }
+
+  .sectionone {
+      justify-content: center;
+      display: flex;
+      margin-top: 6rem;
+  }
+  
+  .blobone {
+      z-index: 0;
+  }
+  
+  .textone {
+      text-align: center;
+      margin-left: -90vw;
+      z-index: 2;
+  }
+  
+  .sectiontwo {
+      justify-content: center;
+      display: flex;
+      margin-top: 6rem;
+  }
+  
+  .blobtwo {
+      z-index: 0;
+      margin-top: 150px;
+  }
+  
+  .texttwo {
+      text-align: center;
+      margin-right: -90vw;
+      z-index: 2;
+  }
+  
+  .quote {
+    border-style: none;
+    padding: 10px;
+    margin-bottom: 7rem;
+  }
+  .quotebox {
+    width: 80vw;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .introtext {
+      margin-top: 9rem;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 7rem;
+}
+
+@media (max-width: 1600px) {
+  .cards {
+    justify-content: center;
+  }
+}
+
+.finaltext {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem; 
+}
