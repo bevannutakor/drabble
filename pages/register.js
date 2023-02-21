@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import firebaseConfig from '../Models/firebaseConfig';
 import { useRouter } from 'next/router'
 import Link from "next/link";
 
