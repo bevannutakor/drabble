@@ -1,4 +1,4 @@
-import { firebase } from "../pages/Models/firebaseConfig";
+import { firebase } from "../Models/firebaseConfig";
 import destroyUserCookie from './destroyUserCookie';
 
 async function logout(){

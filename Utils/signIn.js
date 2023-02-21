@@ -1,4 +1,4 @@
-import { firebase } from '../pages/Models/firebaseConfig';
+import { firebase } from '../Models/firebaseConfig';
 import postToken from './postToken';
 async function signIn(email, password){
     return firebase.auth().signInWithEmailAndPassword(email, password)

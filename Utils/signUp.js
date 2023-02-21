@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { firebase } from '../pages/Models/firebaseConfig';
+import { firebase } from '../Models/firebaseConfig';
 import postToken from './postToken';
 
 async function sendUserInfo(uid, username){

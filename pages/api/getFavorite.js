@@ -1,4 +1,4 @@
-import admin from "../Models/firbaseAdmin";
+import admin from "../../Models/firbaseAdmin"
 
 const db = admin.firestore();
 async function likedDrabblesSnapshot(userId){

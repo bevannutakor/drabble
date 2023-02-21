@@ -1,4 +1,4 @@
-import admin from "../Models/firbaseAdmin";
+import admin from "../../Models/firbaseAdmin"
 import { v4 as uuidv4 } from 'uuid';
 export default async function newDrabble(req, res){
     const db = admin.firestore();

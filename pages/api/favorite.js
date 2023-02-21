@@ -1,4 +1,4 @@
-import admin from "../Models/firbaseAdmin";
+import admin from "../../Models/firbaseAdmin"
 export default async function favorite(req, res){
     if(req.method === "POST"){
         const db = admin.firestore();

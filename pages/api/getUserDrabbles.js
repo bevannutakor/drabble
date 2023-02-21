@@ -1,4 +1,4 @@
-import admin from "../Models/firbaseAdmin";
+import admin from "../../Models/firbaseAdmin"
 async function getAllDrabbleSnapshots(userId){
     const db = admin.firestore();
     const userRef = await db.collection("user").doc(userId);

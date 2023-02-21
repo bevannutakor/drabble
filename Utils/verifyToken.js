@@ -1,4 +1,4 @@
-import admin from '../pages/Models/firbaseAdmin'
+import admin from '../Models/firbaseAdmin'
 
 //used to share current user state between various components
 async function verifyTokenCookie(cookie){

@@ -1,5 +1,5 @@
 import { serialize } from 'cookie';
-import admin from "../Models/firbaseAdmin";
+import admin from "../../Models/firbaseAdmin"
 
 
 export default async function auth(req, res) {
