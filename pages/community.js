@@ -22,20 +22,26 @@ export default function Community() {
             <div className={ toggleState === 1 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(1)}
             >
-                Hot
+                All
             </div>
+
             <div className={ toggleState === 2 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(2)}
             >
-                New
+                Hot
             </div>
             <div className={ toggleState === 3 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(3)}
             >
-                Polar
+                New
             </div>
             <div className={ toggleState === 4 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(4)}
+            >
+                Polar
+            </div>
+            <div className={ toggleState === 5 ? `${styles.selectedtab}` : `${styles.tab}` }
+            onClick={() => toggleTab(5)}
             >
                 Top
             </div>
@@ -45,7 +51,7 @@ export default function Community() {
             <div
             className={ toggleState === 1 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
-            <h2>Hot</h2>
+            <h2>All</h2>
             <div className={styles.cards}>
                     <Card />
                     <Card />
@@ -59,46 +65,42 @@ export default function Community() {
             <div
             className={ toggleState === 2 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
-                <h2>New</h2>
+                <h2>Hot</h2>
                 
                 <div className={styles.cards}>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    Coming Soon
                 </div>
             </div>
 
             <div
             className={ toggleState === 3 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
-            <h2>Polar</h2>
+            <h2>New</h2>
             <div className={styles.cards}>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    Coming Soon
                 </div>
             </div>
 
             <div
             className={ toggleState === 4 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
+            <h2>Polar</h2>
+                <div className={styles.cards}>
+                    Coming Soon
+                </div>
+            </div>
+
+            <div
+            className={ toggleState === 5 ? `${styles.selectedcontent}` : `${styles.content}` }
+            >
             <h2>Top</h2>
-            <div className={styles.cards}>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                <div className={styles.cards}>
+                    Coming Soon
                 </div>
             </div>
         </div>
+
+        
     </>
         </main>
 

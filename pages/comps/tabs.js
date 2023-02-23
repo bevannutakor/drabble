@@ -1,9 +1,9 @@
 import { useState, useContext} from 'react';
-import axios from 'axios';
 import styles from '../../styles/Tabs.module.css'
 import Card from './cards';
 
 import { UserContext } from '../../Contexts/UserProvider';
+import favoritePost from '../../Utils/favoritePost';
 
 function Tabs(props) {
     const { currentUser } = useContext(UserContext);
@@ -14,23 +14,6 @@ function Tabs(props) {
     const toggleTab = (index) => {
         setToggleState(index);
     };
-
-
-    const favoritePost = async (postId, posterUid) => {
-        if(currentUser){
-            await axios.post('/api/favorite', {
-                headers: {
-                 'Content-Type': 'application/json'
-                },
-                uid: currentUser.uid,
-                posterUid: posterUid,
-                postId: postId,
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-        }
-    }
 
   return (
     <>
@@ -81,7 +64,7 @@ function Tabs(props) {
                 
                 <div className={styles.cards}>
                     {userDrabbles && userDrabbles.map((post) => (
-                        <Card drabbleCardText={post.text} favoritePost={() => favoritePost(post.postId, post.userId)}/>
+                        <Card drabbleCardText={post[0]} favoritePost={() => favoritePost(currentUser,post[1], post[2])}/>
                     ))}
                 </div>
             </div>
@@ -91,8 +74,8 @@ function Tabs(props) {
             >
                 <h2>Favourites</h2>
                 <div className={styles.cards}>
-                        {likedDrabbles && likedDrabbles.map((post) => (
-                            <Card drabbleCardText={post.text}/>
+                        {likedDrabbles && likedDrabbles.map((text) => (
+                            <Card drabbleCardText={text}/>
                         ))}
                 </div>
             </div>

@@ -22,7 +22,7 @@ async function signUp(email, username, password){
                 res.user.updateProfile({
                     displayName: username
                 })
-                console.log(res.user)
+                //console.log(res.user)
                 return await postToken(await res.user.getIdToken()) && await sendUserInfo(await res.user.uid, username);
 
             }

@@ -2,7 +2,7 @@ import admin from "../../Models/firbaseAdmin"
 export default async function favorite(req, res){
     if(req.method === "POST"){
         const db = admin.firestore();
-        //this only likes the current users post might need to save user id in each post
+        
         const userDrabbleRef = await db.collection('user').doc(req.body.posterUid).collection("UserDrabbles").doc(req.body.postId);
 
         const AppWideDrabblesRef = await db.collection("AppWideDrabbles").doc(req.body.postId);
@@ -16,7 +16,7 @@ export default async function favorite(req, res){
         })
 
 
-        //how should username changes be handled in documents
+        
         const favoritedByList = userDrabbleRef.collection("FavoritedBy").doc(req.body.uid);
 
         favoritedByList.set({

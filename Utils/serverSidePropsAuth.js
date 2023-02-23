@@ -16,7 +16,6 @@ export default async function getServerSidePropsAuth(context){
       propsObject.email = authentication ? authentication.email: "";
       propsObject.uid = authentication ? authentication.uid: "";
     }
-  
     return {
       props: propsObject,
     }

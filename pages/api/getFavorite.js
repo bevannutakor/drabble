@@ -13,15 +13,17 @@ async function likedDrabblesSnapshot(userId){
 export default async function getFavorite(req, res){
     if(req.method === "POST"){
         let likedDrabbles = await likedDrabblesSnapshot(req.body.uid);
-        let likedDrabblesInfo = [];
-        
-        for(let i=0; i<likedDrabbles.length; i++){
-            const AppWideDrabblesRef = await db.collection("AppWideDrabbles").doc(likedDrabbles[i].postId).get(); 
-            
-            likedDrabblesInfo.push({
-                text: AppWideDrabblesRef.data().text
-            })
-        }
-        res.status(200).send(likedDrabblesInfo);
+        //let likedDrabblesInfo = [];
+        //const AppWideDrabblesRef = await db.collection("AppWideDrabbles");
+
+        let likedDrabblesArray = await Promise.all(likedDrabbles.map(
+            async (post) => {
+                let AppWideDrabblesRef = await db.collection("AppWideDrabbles").doc(post.postId).get();
+
+                return AppWideDrabblesRef.data().text
+            }
+        ));
+
+        res.status(200).send(likedDrabblesArray);
     }
 }

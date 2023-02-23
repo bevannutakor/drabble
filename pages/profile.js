@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useCallback, useEffect, useState, useRef } from "react";
 import Router from 'next/router'
 
 import { UserContext } from '../Contexts/UserProvider';
-
 import  getServerSidePropsAuth  from '../Utils/serverSidePropsAuth';
-import axios from 'axios';
+import fetchUserDrabbles from '../Utils/fetchUserDrabbles';
+import getFavorites from '../Utils/fetchFavorites';
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -20,6 +20,9 @@ import { UilBars } from '@iconscout/react-unicons'
 import Menu from './comps/menu'
 import Tabs from "./comps/tabs";
 
+import admin from "../Models/firbaseAdmin";
+
+
 
 
 export async function getServerSideProps(context){
@@ -32,68 +35,57 @@ export async function getServerSideProps(context){
       }
     }
   }
+  
+  //Abstract all this into different files
+  const db = admin.firestore();
+  //getting userDrabbles
+  const getAllDrabbleSnapshots = async () => {
+    const userRef = await db.collection("user").doc(auth.props.uid);
+    const snapshot = await userRef.collection("UserDrabbles").get();
+    return snapshot.docs.map((doc) => {
+      return [doc.data().text, doc.data().postId, doc.data().userId]
+    });   
+  }
+
+  const getUserDrabbles = async () => {
+    let userDrabbles = await getAllDrabbleSnapshots();
+    return userDrabbles;
+  }
+
+  //getting user's favorite drabble posts
+  const likedDrabblesSnapshot = async () => {
+    const userRef = await db.collection("user").doc(auth.props.uid);
+    const drabbleIdSnapshot = await userRef.collection("FavoritedDrabblesList").get();
+
+    let drabbleFavorites = await drabbleIdSnapshot.docs.map((doc) => doc.data());
+    
+    return drabbleFavorites;
+  }
+
+  const getFavorite = async () => {
+      let likedDrabbles = await likedDrabblesSnapshot();
+      let likedDrabblesArray = await Promise.all(likedDrabbles.map(
+        async (post) => {
+          let AppWideDrabblesRef = await db.collection("AppWideDrabbles").doc(post.postId).get();
+
+          return AppWideDrabblesRef.data().text
+        }
+      ));
+
+        return likedDrabblesArray;
+  }
+
+  //store return values
+  const drabbles = await getUserDrabbles();
+  const favorites = await getFavorite();
+
   return {
-    props: {}
+    props: {drabbles, favorites}
   }
 }
 
-export default function Profile(props) {
+export default function Profile({drabbles, favorites}) {
   const { currentUser } = useContext(UserContext);
-  const [posts, setPosts] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
-
-  //todo: separate into another file for reusability
-  const usePrevious = (value) => {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    }, ref.value)
-    //console.log(ref.value)
-    return ref.current
-  }
-
-  const fetchDrabbles = async () => {
-    if(currentUser){
-      await axios.post('/api/getUserDrabbles', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        uid: currentUser.uid
-      })
-      .then((res) => {
-        console.log(res.data)
-        setPosts(res.data)
-      })
-    }
-  }
-
-  const getFavorites = async () => {
-    if(currentUser){
-        await axios.post('api/getFavorite', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            uid: currentUser.uid
-        })
-        .then((res) => {
-            console.log(res.data)
-            setLikedPosts(res.data);
-        })
-    }
-  } 
-  
-  const prevDrabblePostData = usePrevious(posts);
-  const prevLikedPost = usePrevious(likedPosts);
-
-  useEffect(() => {
-    if(posts === prevDrabblePostData){
-      fetchDrabbles();
-    }
-    if(likedPosts === prevLikedPost){
-      getFavorites();
-    }
-  })
-  
   return (
     <div className={styles.container}>
         <Head>
@@ -130,7 +122,7 @@ export default function Profile(props) {
         <main>
           <h1 className='text-center mt-8 xl:mt-24'>Drabble User</h1>
           <p className='text-center text-lg -mt-2.5'>@{currentUser && <span>{currentUser.displayName}</span>}</p>
-          {posts ? (<Tabs userDrabbles={posts} likedDrabbles={likedPosts}/>) : <div>You currently have no drabble posts</div>}
+          {drabbles ? (<Tabs userDrabbles={drabbles} likedDrabbles={favorites}/>) : <div>You currently have no drabble posts</div>}
 
         </main>
 
