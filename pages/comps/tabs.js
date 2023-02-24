@@ -81,7 +81,7 @@ function Tabs(props) {
                 {/*Unlike logic needed*/}
                 <div className={styles.cards}>
                         {
-                            likedDrabbles.length !== 0 ? likedDrabbles.map((drabble) => (
+                            likedDrabbles ? likedDrabbles.map((drabble) => (
                                 <Card drabbleCardText={drabble[0]} drabbleEmojis={drabble[1]}/>
                             )) : 
                             <div>You currently have no favorite posts</div>
