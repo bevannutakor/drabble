@@ -3,8 +3,6 @@ import Router from 'next/router'
 
 import { UserContext } from '../Contexts/UserProvider';
 import  getServerSidePropsAuth  from '../Utils/serverSidePropsAuth';
-import fetchUserDrabbles from '../Utils/fetchUserDrabbles';
-import getFavorites from '../Utils/fetchFavorites';
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -26,6 +24,7 @@ import admin from "../Models/firbaseAdmin";
 
 
 export async function getServerSideProps(context){
+
   const auth = await getServerSidePropsAuth(context);
   if (auth.props.authenticated === false){
     return{
@@ -42,14 +41,10 @@ export async function getServerSideProps(context){
   const getAllDrabbleSnapshots = async () => {
     const userRef = await db.collection("user").doc(auth.props.uid);
     const snapshot = await userRef.collection("UserDrabbles").get();
-    return snapshot.docs.map((doc) => {
-      return [doc.data().text, doc.data().postId, doc.data().userId]
-    });   
-  }
 
-  const getUserDrabbles = async () => {
-    let userDrabbles = await getAllDrabbleSnapshots();
-    return userDrabbles;
+    return snapshot.docs.map((doc) => {
+      return [doc.data().text, doc.data().emojis, doc.data().postId, doc.data().userId]
+    });   
   }
 
   //getting user's favorite drabble posts
@@ -62,13 +57,14 @@ export async function getServerSideProps(context){
     return drabbleFavorites;
   }
 
+  //getting the favorited drabbles from the Appwide drabble storage
   const getFavorite = async () => {
       let likedDrabbles = await likedDrabblesSnapshot();
       let likedDrabblesArray = await Promise.all(likedDrabbles.map(
         async (post) => {
           let AppWideDrabblesRef = await db.collection("AppWideDrabbles").doc(post.postId).get();
 
-          return AppWideDrabblesRef.data().text
+          return [AppWideDrabblesRef.data().text, AppWideDrabblesRef.data().emojis]
         }
       ));
 
@@ -76,7 +72,7 @@ export async function getServerSideProps(context){
   }
 
   //store return values
-  const drabbles = await getUserDrabbles();
+  const drabbles = await getAllDrabbleSnapshots();
   const favorites = await getFavorite();
 
   return {
@@ -122,7 +118,7 @@ export default function Profile({drabbles, favorites}) {
         <main>
           <h1 className='text-center mt-8 xl:mt-24'>Drabble User</h1>
           <p className='text-center text-lg -mt-2.5'>@{currentUser && <span>{currentUser.displayName}</span>}</p>
-          {drabbles ? (<Tabs userDrabbles={drabbles} likedDrabbles={favorites}/>) : <div>You currently have no drabble posts</div>}
+          <Tabs userDrabbles={drabbles} likedDrabbles={favorites}/>
 
         </main>
 

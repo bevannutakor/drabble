@@ -23,7 +23,7 @@ export default function Login(){
         e.preventDefault();
         const {email, password} = e.target.elements;
         await signIn(email.value, password.value);
-        window.location.href = "/profile"
+        window.location.href = "/write"
     }
 
     const handleGoogleAuth = async (e) => {

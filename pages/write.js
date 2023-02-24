@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import Head from 'next/head'
 import axios from 'axios';
 import styles from '../styles/Write.module.css'
@@ -12,7 +12,7 @@ import  getServerSidePropsAuth  from '../Utils/serverSidePropsAuth';
 
 export async function getServerSideProps(context){
   const auth = await getServerSidePropsAuth(context);
-  console.log(auth);
+  
   if (auth.props.authenticated === false){
     return{
       redirect: {
@@ -28,7 +28,26 @@ export async function getServerSideProps(context){
 
 export default function Write() {
   const { currentUser } = useContext(UserContext);
-  const [drabble, setDrabble] = useState("")
+  const [drabble, setDrabble] = useState("");
+  const [emojis, setEmojis] = useState([]);
+
+  const randomlyGenerateEmoji = async (e) => {
+    let data = [];
+    e.preventDefault();
+    await axios.get("api/generateEmoji", {
+      responseType: 'json'
+    })
+    .then((res) => {
+      let response = res.data;
+      for(var i=0; i<6; i++){
+        //select randomly 6 emojis from the response
+        let index = Math.floor(Math.random() * response.length);
+        data.push(response[index].emoji)
+        response.splice(index, 1)
+      }
+      setEmojis(data)
+    });
+  }
 
   const handleDrabbleChange = (e) => {
     setDrabble(e.target.value);
@@ -36,17 +55,20 @@ export default function Write() {
 
   const handleSubmitDrabble = async (e) => {
     e.preventDefault();
-    let url = "api/newDrabble";
-    
-    const response = await axios.post(url, {
+    const response = await axios.post("api/newDrabble", {
       headers: {
         'Content-Type': 'application/json',
       },
       drabble: drabble,
-      uid: currentUser.uid
+      uid: currentUser.uid,
+      emojis: emojis
     })
     return response;
   }
+
+  useEffect(() => {
+    console.log(emojis);
+  }, [emojis])
 
   return (
     <div className={styles.container}>
@@ -63,7 +85,17 @@ export default function Write() {
 
         <main>
           <div className='flex justify-center items-center mt-16'>
-            ✨ 💀 😦 <br />🔒 😮 🌳
+            <div className='flex justify-center items-center mt-16'>
+              <button class="shadow bg-stone-500 hover:bg-stone-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-2xl" onClick={randomlyGenerateEmoji}>
+                <div className={styles.emojiContainer}>
+                  {
+                    emojis.length !== 0 ? emojis.map((emoji) => (
+                    <div className={styles.emoji}>{emoji}</div>
+                  )) : <div>Generate Emoji Prompt</div>
+                  }
+                </div>
+              </button>
+            </div>
           </div>
           <div className='flex justify-center items-center mt-16'>
             <Textarea

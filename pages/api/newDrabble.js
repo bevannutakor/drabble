@@ -12,7 +12,7 @@ export default async function newDrabble(req, res){
 
         AppWideDrabblesRef.set({
             text: req.body.drabble,
-            emojis: '',
+            emojis: req.body.emojis,
             favorites: 0,
             createdAt: createdAt,
             private: false,
@@ -20,10 +20,10 @@ export default async function newDrabble(req, res){
             userId: req.body.uid
         })
 
-        //may not need this and just pull all drabbles from appwide refernce
+        
         userDrabbleRef.set({
             text: req.body.drabble,
-            emojis: '',
+            emojis: req.body.emojis,
             favorites: 0,
             createdAt: createdAt,
             private: false,

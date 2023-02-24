@@ -4,11 +4,15 @@ import styles from '../../styles/Cards.module.css'
 
 function Card(props) {
     //favorites, upvote, downvote, comment props need to be added
-    const { drabbleCardText, favoritePost } = props;
+    const { drabbleCardText,  drabbleEmojis, favoritePost } = props;
     return (
         <div className={styles.container}>
-            <div className={styles.emojis}>
-                ✨ 💀 😦
+            <div className={styles.emojiContainer}>
+                {
+                    drabbleEmojis && drabbleEmojis.map((emoji) => (
+                        <div className={styles.emojis}>{emoji}</div>
+                    ))
+                }
             </div>
 
             <div className={styles.words}>

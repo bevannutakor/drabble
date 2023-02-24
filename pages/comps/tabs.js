@@ -63,9 +63,14 @@ function Tabs(props) {
                 <h2>Stories</h2>
                 
                 <div className={styles.cards}>
-                    {userDrabbles && userDrabbles.map((post) => (
-                        <Card drabbleCardText={post[0]} favoritePost={() => favoritePost(currentUser,post[1], post[2])}/>
-                    ))}
+
+                    {
+                        userDrabbles.length !== 0 ? userDrabbles.map((drabble) => (
+                            <Card drabbleCardText={drabble[0]} drabbleEmojis={drabble[1]} favoritePost={() => favoritePost(currentUser,drabble[2], drabble[3])}/>
+                        )) : 
+                        
+                        <div>You currently have no drabble posts</div>
+                    }
                 </div>
             </div>
 
@@ -73,10 +78,14 @@ function Tabs(props) {
             className={ toggleState === 3 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
                 <h2>Favourites</h2>
+                {/*Unlike logic needed*/}
                 <div className={styles.cards}>
-                        {likedDrabbles && likedDrabbles.map((text) => (
-                            <Card drabbleCardText={text}/>
-                        ))}
+                        {
+                            likedDrabbles.length !== 0 ? likedDrabbles.map((drabble) => (
+                                <Card drabbleCardText={drabble[0]} drabbleEmojis={drabble[1]}/>
+                            )) : 
+                            <div>You currently have no favorite posts</div>
+                        }
                 </div>
             </div>
 
