@@ -65,7 +65,7 @@ function Tabs(props) {
                 <div className={styles.cards}>
 
                     {
-                        userDrabbles.length !== 0 ? userDrabbles.map((drabble) => (
+                        userDrabbles ? userDrabbles.map((drabble) => (
                             <Card drabbleCardText={drabble[0]} drabbleEmojis={drabble[1]} favoritePost={() => favoritePost(currentUser,drabble[2], drabble[3])}/>
                         )) : 
                         
