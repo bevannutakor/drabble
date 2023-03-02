@@ -3,8 +3,8 @@ import admin from "../../Models/firbaseAdmin"
 
 
 export default async function auth(req, res) {
-    //temp
-    const expiresIn = 5 * 60 * 1000;
+    
+    const expiresIn = 5 * 24 * 60 * 60 * 1000;
     if(req.method === 'POST'){
         try{
             let idToken = req.body.token;
@@ -34,5 +34,4 @@ export default async function auth(req, res) {
     }
 }
 
-//logic needs to be done for when cookie expires, log user out
 // error handling

@@ -27,6 +27,7 @@ export async function getServerSideProps(context){
 }
 
 export default function Write() {
+
   const { currentUser } = useContext(UserContext);
   const [drabble, setDrabble] = useState("");
   const [emojis, setEmojis] = useState([]);
