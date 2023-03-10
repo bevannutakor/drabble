@@ -17,7 +17,6 @@ import signInGoogle from "../Utils/AuthProviders/signInGoogle";
 import styles from "../styles/Register.module.css"
 
 export default function Login(){
-    const router = useRouter()
 
     const handleSubmitLogin = async (e) => {
         e.preventDefault();

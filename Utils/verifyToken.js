@@ -9,7 +9,7 @@ async function verifyTokenCookie(cookie){
         .then((decoded) => {
             isAuth = true;
             email = decoded.email;
-            userId = decoded.uid
+            userId = decoded.uid;
         }).catch(() => {
             isAuth = false;
         })    

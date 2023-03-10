@@ -1,6 +1,5 @@
 import axios from 'axios';
 async function postToken(token){
-    //temp variable
     let url = "/api/auth";
     
     const response = await axios.post(url, {

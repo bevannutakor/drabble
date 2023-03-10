@@ -18,10 +18,6 @@ export async function getServerSideProps(context){
 
     const db = admin.firestore();
     let allDrabbles;
-    //let hottestDrabbles;
-    //let newDrabbles;
-    //let polarDrabbles;
-    //let topDrabbles;
 
     const allDrabblesSnapshot = await db.collection("AppWideDrabbles").get();
     allDrabbles = await allDrabblesSnapshot.docs.map((doc) => [doc.data().text, doc.data().emojis, doc.data().postId, doc.data().userId]);

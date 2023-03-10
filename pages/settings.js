@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Head from 'next/head'
 import ProfilePicture from '../images/pp.png'
 import styles from "../styles/Settings.module.css"
 import Footer from './comps/footer'
@@ -21,7 +22,16 @@ export default function Settings() {
     window.location.href = '/'
   }
   return (
+    
     <div className={styles.container}>
+        <Head>
+            <meta name="viewport" content="width=device-width"/>
+            <meta charSet="utf-8"/>
+            <title>Drabble</title>
+            <meta name="description" content="Ability to express interesting and meaningful ideas in a confined space" />
+            <meta name="next-head-count" content="4"/>
+            <link rel="icon" href="/icon-384x384.png" />
+        </Head>
         <Navbar />
 
         <div className={styles.pp}>

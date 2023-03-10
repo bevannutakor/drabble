@@ -33,5 +33,3 @@ export default async function auth(req, res) {
         }
     }
 }
-
-// error handling

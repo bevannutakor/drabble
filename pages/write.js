@@ -12,7 +12,6 @@ import  getServerSidePropsAuth  from '../Utils/serverSidePropsAuth';
 
 export async function getServerSideProps(context){
   const auth = await getServerSidePropsAuth(context);
-  
   if (auth.props.authenticated === false){
     return{
       redirect: {

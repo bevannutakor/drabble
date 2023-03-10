@@ -3,16 +3,15 @@ import { parseCookies } from 'nookies';
 
 export default async function getServerSidePropsAuth(context){
     let propsObject = {
-      authenticated: false,
+      authenticated: "",
       email: "",
-      user: "",
       uid: ""
     }
     const cookies = parseCookies(context);
 
     if(cookies.user){
       const authentication = await verifyTokenCookie(cookies.user);
-      propsObject.authenticated = authentication;
+      propsObject.authenticated = authentication.isAuth;
       propsObject.email = authentication ? authentication.email: "";
       propsObject.uid = authentication ? authentication.uid: "";
     }
