@@ -24,9 +24,8 @@ import admin from "../Models/firbaseAdmin";
 
 
 export async function getServerSideProps(context){
-
   const auth = await getServerSidePropsAuth(context);
-  if (auth.props.authenticated === false){
+  if (auth.props.authenticated === ""){
     return{
       redirect: {
         destination: "/login",
