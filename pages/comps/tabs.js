@@ -5,6 +5,7 @@ import Card from './cards';
 import { UserContext } from '../../Contexts/UserProvider';
 import favoritePost from '../../Utils/favoritePost';
 
+
 function Tabs(props) {
     const { currentUser } = useContext(UserContext);
     const { userDrabbles, likedDrabbles } = props;
@@ -51,9 +52,7 @@ function Tabs(props) {
             >
             <h2>About</h2>
             <span>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-                praesentium incidunt quia aspernatur quasi quidem facilis quo nihil
-                vel voluptatum?
+                Coming Soon
             </span>
             </div>
 
@@ -92,21 +91,15 @@ function Tabs(props) {
             <div
             className={ toggleState === 4 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
-            <h2>Followers</h2>
-            <span>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-                voluptatum qui adipisci.
-            </span>
+                <h2>Followers</h2>
+                <span>Coming soon</span>        
             </div>
 
             <div
             className={ toggleState === 5 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
             <h2>Following</h2>
-            <span>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-                voluptatum qui adipisci.
-            </span>
+            <span>Coming soon</span>
             </div>
         </div>
     </>
