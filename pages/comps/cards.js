@@ -22,17 +22,17 @@ function Card(props) {
             </div>
 
             <div className={styles.bar}>
-                <div className={styles.barleft}>
+                {/*<div className={styles.barleft}>
                     <FiMessageSquare className={styles.comments}/>
                     <FiBookmark className={styles.saves}/>
-                </div>
+                </div>*/}
                 <div className={styles.barmid} onClick={favoritePost}>
                     <FiStar className={styles.favourites}/>
                 </div>
-                <div className={styles.barright}>
+                {/*<div className={styles.barright}>
                     <FiArrowUp className={styles.upvote}/>
                     <FiArrowDown className={styles.downvote}/>
-                </div>
+            </div>*/}
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ import favoritePost from '../../Utils/favoritePost';
 
 function Tabs(props) {
     const { currentUser } = useContext(UserContext);
-    const { userDrabbles, likedDrabbles } = props;
+    const { userDrabbles, likedDrabbles, about } = props;
     const [toggleState, setToggleState] = useState(1);
     const [favoriteToggleState, setFavoriteToggleState] = useState(0);
 
