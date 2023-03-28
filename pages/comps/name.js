@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useState,useContext} from 'react'
 import axios from 'axios'
 
 import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
@@ -7,8 +7,8 @@ import { UilEnvelope } from '@iconscout/react-unicons'
 import { UserContext } from '../../Contexts/UserProvider';
 
 function Name() {
-  const [visible, setVisible] = React.useState(false);
-  const [name, setName] = React.useState("")
+  const [visible, setVisible] = useState(false);
+  const [name, setName] = useState("")
   const handler = () => setVisible(true);
 
   const closeHandler = () => {
@@ -30,7 +30,7 @@ function Name() {
       <Button auto css={{ color: '#a8a29e', backgroundColor: '#fafaf9' }} onClick={handler}>
         Display Name
       </Button>
-      <form>
+      
         <Modal
           closeButton
           blur
@@ -63,7 +63,7 @@ function Name() {
             </Button>
           </Modal.Footer>
         </Modal>
-      </form>
+  
     </div>
   )
 }

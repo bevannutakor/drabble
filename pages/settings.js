@@ -54,7 +54,7 @@ export default function Settings() {
 
         <div className='flex justify-center items-center gap-5'>
             <Name />
-            <Location />
+            {/*<Location />*/}
             <Bio />
         </div>
 

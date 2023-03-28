@@ -36,7 +36,8 @@ export async function getServerSideProps(context){
   
   //Abstract all this into different files
   const db = admin.firestore();
-  //getting userDrabbles
+
+  //fetch userDrabbles
   const getAllDrabbleSnapshots = async () => {
     const userRef = await db.collection("user").doc(auth.props.uid);
     const snapshot = await userRef.collection("UserDrabbles").get();
@@ -46,7 +47,7 @@ export async function getServerSideProps(context){
     });   
   }
 
-  //getting user's favorite drabble posts
+  //fetch user's favorite drabble posts
   const likedDrabblesSnapshot = async () => {
     const userRef = await db.collection("user").doc(auth.props.uid);
     const drabbleIdSnapshot = await userRef.collection("FavoritedDrabblesList").get();
@@ -56,7 +57,7 @@ export async function getServerSideProps(context){
     return drabbleFavorites;
   }
 
-  //getting the favorited drabbles from the Appwide drabble storage
+  //fetch the favorited drabbles from the Appwide drabble storage
   const getFavorite = async () => {
       let likedDrabbles = await likedDrabblesSnapshot();
       let likedDrabblesArray = await Promise.all(likedDrabbles.map(
@@ -67,19 +68,26 @@ export async function getServerSideProps(context){
         }
       ));
 
-        return likedDrabblesArray;
+      return likedDrabblesArray;
+  }
+
+  const getBio = async () => {
+    const userRef = await db.collection("user").doc(auth.props.uid).get();
+    const bio = userRef.data().bio;
+    return bio;
   }
 
   //store return values
   const drabbles = await getAllDrabbleSnapshots();
   const favorites = await getFavorite();
+  const bio = await getBio();
 
   return {
-    props: {drabbles, favorites}
+    props: {drabbles, favorites, bio}
   }
 }
 
-export default function Profile({drabbles, favorites}) {
+export default function Profile({drabbles, favorites, bio}) {
   const { currentUser } = useContext(UserContext);
   return (
     <div className={styles.container}>
@@ -117,7 +125,7 @@ export default function Profile({drabbles, favorites}) {
         <main>
           <h1 className='text-center mt-8 xl:mt-24'>Drabble User</h1>
           <p className='text-center text-lg -mt-2.5'>@{currentUser && <span>{currentUser.displayName}</span>}</p>
-          <Tabs userDrabbles={drabbles} likedDrabbles={favorites}/>
+          <Tabs userDrabbles={drabbles} likedDrabbles={favorites} bio={bio}/>
 
         </main>
 

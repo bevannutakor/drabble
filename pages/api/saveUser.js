@@ -5,7 +5,8 @@ export default async function saveUser(req, res){
         const userRef = await db.collection('user').doc(req.body.uid)
         userRef.set({
             username: req.body.username,
-            userPlan: "Free tier"
+            userPlan: "Free tier",
+            bio: ""
         })
     }
     res.status(200).send("Successful user creation");

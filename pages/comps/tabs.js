@@ -8,7 +8,7 @@ import favoritePost from '../../Utils/favoritePost';
 
 function Tabs(props) {
     const { currentUser } = useContext(UserContext);
-    const { userDrabbles, likedDrabbles, about } = props;
+    const { userDrabbles, likedDrabbles, bio } = props;
     const [toggleState, setToggleState] = useState(1);
     const [favoriteToggleState, setFavoriteToggleState] = useState(0);
 
@@ -22,7 +22,7 @@ function Tabs(props) {
             <div className={ toggleState === 1 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(1)}
             >
-                About
+                bio
             </div>
             <div className={ toggleState === 2 ? `${styles.selectedtab}` : `${styles.tab}` }
             onClick={() => toggleTab(2)}
@@ -50,9 +50,9 @@ function Tabs(props) {
             <div
             className={ toggleState === 1 ? `${styles.selectedcontent}` : `${styles.content}` }
             >
-            <h2>About</h2>
+            <h2>Bio</h2>
             <span>
-                Coming Soon
+                {bio}
             </span>
             </div>
 
