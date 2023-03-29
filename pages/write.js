@@ -31,6 +31,8 @@ export default function Write() {
   const [drabble, setDrabble] = useState("");
   const [emojis, setEmojis] = useState([]);
 
+  const [wordCount, setWordCount] = useState(0);
+
   const randomlyGenerateEmoji = async (e) => {
     let data = [];
     e.preventDefault();
@@ -50,6 +52,7 @@ export default function Write() {
   }
 
   const handleDrabbleChange = (e) => {
+    setWordCount(drabble.split(" ").length);
     setDrabble(e.target.value);
   }
 
@@ -65,10 +68,6 @@ export default function Write() {
     })
     return response;
   }
-
-  useEffect(() => {
-    console.log(emojis);
-  }, [emojis])
 
   return (
     <div className={styles.container}>
@@ -96,19 +95,22 @@ export default function Write() {
                 </div>
               </button>
             </div>
+            
           </div>
+          {wordCount >= 100 ? (<p className={styles.exceedWarning}>You have exceeded the 100 word limit</p>) : <p></p>}
           <div className='flex justify-center items-center mt-16'>
             <Textarea
               placeholder="Let your imagination run wild."
               status='default'
-              minRows={20}
-              maxRows={100}
+              minRows={10}
+              maxRows={50}
               width={1000}
               name="drabble"
               onChange={handleDrabbleChange}
-            />
+              maxLength={wordCount >= 100 ? drabble.length : 1000000}
+             />
           </div>
-
+          <p className={styles.count}>{wordCount}/100</p>
           <div className='flex justify-center items-center mt-16'>
             <button class="shadow bg-stone-500 hover:bg-stone-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-2xl" type="submit" onClick={handleSubmitDrabble}>
               Submit

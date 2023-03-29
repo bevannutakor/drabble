@@ -10,3 +10,15 @@
 .emoji{
     flex: 0 0 33.333333%;
 }
+
+.exceedWarning{
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.count{
+    margin-left: 12rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
