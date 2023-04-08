@@ -86,7 +86,7 @@
 
 @media screen and (max-width: 943px) {
     .container {
-      width: 300px;
+      width: fit-content;
     }
     .bar {
         width: 70%;
